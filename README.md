@@ -3,6 +3,12 @@
 Convert public domain block lists in a few formats to MikroTik RouterOS static 
 DNS entries.
 
+# Usage
+
+Configure which blocklists to use in preamble, run script, send file to router 
+and `/import adblock.all.rsc` to import DNS rules. You might want to tweak
+more than that though.
+
 # Filter lists
 
 I compiled my own collection from https://filterlists.com/ and https://v.firebog.net/hosts/lists.php Since block lists could be malicious, I selected based on 'trust' and how widely lists were used (and thus hoping they get more scrutiny).
@@ -11,7 +17,6 @@ I compiled my own collection from https://filterlists.com/ and https://v.firebog
 
 This Bash script supports a few formats to convert publicly available lists to 
 MikroTik format. Also, I use this to document my way of working for future use.
-
 
 # Blocking methods
 

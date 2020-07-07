@@ -18,6 +18,13 @@ I compiled my own collection from https://filterlists.com/ and https://v.firebog
 This Bash script supports a few formats to convert publicly available lists to 
 MikroTik format. Also, I use this to document my way of working for future use.
 
+# Resource consumption
+
+An RB2011 with 100 of 128 MB free RAM can support ~30k domains.
+
+When loading 50k domains: loading took 3.5min, free RAM went from ~100MB to 5.5 MB (although RAM was already at 5 MB for a while)
+When loading 15k domains: loading took 1 min, free RAM went from ~100MB to 55 MB.
+
 # Blocking methods
 
 ## Solution 1 - NXDOMAIN

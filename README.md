@@ -1,4 +1,4 @@
-# MikroTik ADblock
+# MikroTik Adblock
 
 Convert public domain block lists in a few formats to MikroTik RouterOS static 
 DNS entries.
@@ -35,7 +35,7 @@ Advantages:
 ## Solution 2 - 240.0.0.0/4
 
 Set domain resolution to reserverd IP address. Requires additional firewall 
-rule. Based on guide from [https://github.com/aziraphale/routeros-dns-adblock aziraphale].
+rule. Based on guide from [aziraphale](https://github.com/aziraphale/routeros-dns-adblock).
 
 	/ip dns static add address=240.0.0.1 name="1-1ads.com"
 	/ip firewall filter add chain=forward in-interface=LAN connection-state=new protocol=tcp dst-address=240.0.0.0/4 action=reject reject-with=tcp-reset

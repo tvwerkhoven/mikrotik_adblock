@@ -17,19 +17,35 @@
 # /ip dns static
 # add address=127.0.0.1 name="1-1ads.com"
 
+# check if curl or wget is installed
+CURL_INSTALLED=false
+WGET_INSTALLED=false
+command -v curl >/dev/null 2>&1 && CURL_INSTALLED=true
+command -v wget >/dev/null 2>&1 && WGET_INSTALLED=true
+
 # Select which lists to use
 # USELISTS=(list.disconnect.*.disc.txt list.adaway.hosts.txt list.adguard.hosts.txt list.yoyo.hosts.txt list.easylistdutch.tpl.txt)
 # USELISTS=(list.yoyo.hosts.txt list.easylistdutch.tpl.txt)
 USELISTS=(list.disconnect.*.disc.txt list.adaway.hosts.txt list.yoyo.hosts.txt list.easylistdutch.tpl.txt)
 
 # Collect source lists
-test -f list.disconnect.simple_ad.disc.txt || wget https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt -O list.disconnect.simple_ad.disc.txt
-test -f list.disconnect.simple_tracking.disc.txt || wget https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt -O list.disconnect.simple_tracking.disc.txt
-test -f list.disconnect.simple_malvertising.disc.txt || wget https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt -O list.disconnect.simple_malvertising.disc.txt
-test -f list.adaway.hosts.txt || wget https://adaway.org/hosts.txt -O list.adaway.hosts.txt
-test -f list.adguard.hosts.txt || wget https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardDNS.txt -O list.adguard.hosts.txt
-test -f list.yoyo.hosts.txt || wget "https://pgl.yoyo.org/as/serverlist.php?showintro=0;hostformat=hosts" -O list.yoyo.hosts.txt
-test -f list.easylistdutch.tpl.txt || wget "https://easylist-msie.adblockplus.org/easylistdutch.tpl" -O list.easylistdutch.tpl.txt
+collect_source_list() {
+	local url="${1}"
+	local filename="${2}"
+	if [ ${CURL_INSTALLED} = true ]; then
+		test -f "${filename}" || curl "${url}" -o "${filename}"
+	elif [ ${WGET_INSTALLED} = true ]; then
+		test -f "${filename}" || wget "${url}" -O "${filename}"
+	fi
+}
+
+collect_source_list "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt" "list.disconnect.simple_ad.disc.txt"
+collect_source_list "https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt" "list.disconnect.simple_tracking.disc.txt"
+collect_source_list "https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt" "list.disconnect.simple_malvertising.disc.txt"
+collect_source_list "https://adaway.org/hosts.txt" "list.adaway.hosts.txt"
+collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardDNS.txt" "list.adguard.hosts.txt"
+collect_source_list "https://pgl.yoyo.org/as/serverlist.php?showintro=0;hostformat=hosts"  "list.yoyo.hosts.txt"
+collect_source_list "https://easylist-msie.adblockplus.org/easylistdutch.tpl" "list.easylistdutch.tpl.txt"
 
 cat << EOF > adblock.all.rsc
 /ip dns static

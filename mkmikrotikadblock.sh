@@ -44,7 +44,7 @@ collect_source_list "https://s3.amazonaws.com/lists.disconnect.me/simple_trackin
 collect_source_list "https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt" "list.disconnect.simple_malvertising.disc.txt"
 collect_source_list "https://adaway.org/hosts.txt" "list.adaway.hosts.txt"
 collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardDNS.txt" "list.adguard.hosts.txt"
-collect_source_list "https://pgl.yoyo.org/as/serverlist.php?showintro=0;hostformat=hosts"  "list.yoyo.hosts.txt"
+collect_source_list "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext"  "list.yoyo.hosts.txt"
 collect_source_list "https://easylist-msie.adblockplus.org/easylistdutch.tpl" "list.easylistdutch.tpl.txt"
 
 cat << EOF > adblock.all.rsc

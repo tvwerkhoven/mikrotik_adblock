@@ -5,9 +5,20 @@ DNS entries.
 
 # Usage
 
+## Install
+
 Configure which blocklists to use in preamble, run script, send file to router 
-and `/import adblock.all.rsc` to import DNS rules. You might want to tweak
-more than that though.
+and use
+
+	/import adblock.all.rsc
+
+to import DNS rules. You might want to tweak more than that though.
+
+## Clean up
+
+To remove adblock domains, run
+
+	/ip dns static remove [find type=NXDOMAIN]
 
 # Filter lists
 

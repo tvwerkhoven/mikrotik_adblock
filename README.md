@@ -20,6 +20,10 @@ To remove adblock domains, run
 
 	/ip dns static remove [find type=NXDOMAIN]
 
+Or match specific marker in e.g. comments
+
+	/ip dns static remove [find comment="mikrotikadblock"]
+
 # Filter lists
 
 I compiled my own collection from https://filterlists.com/ and https://v.firebog.net/hosts/lists.php Since block lists could be malicious, I selected based on 'trust' and how widely lists were used (and thus hoping they get more scrutiny).
@@ -38,7 +42,7 @@ When loading 15k domains: loading took 1 min, free RAM went from ~100MB to 55 MB
 
 # Blocking methods
 
-## Solution 1 - NXDOMAIN
+## Solution 1 - NXDOMAIN - optimal approach
 
 Set domain resolution to NXDOMAIN (=Non eXisting)
 

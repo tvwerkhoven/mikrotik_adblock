@@ -56,7 +56,7 @@ process_source_list() {
 
 	# Process hosts-format lists
 	for f in list.*.hosts.txt; do
-		[[ ${USELISTS[*]} =~ "$f" ]] && echo "using list $f" && grep -v -e "localhost" -e '^$' $f | awk "${FMT_DNSMASQ}" >> /tmp/adblock.all.tmp
+		[[ ${USELISTS[*]} =~ "$f" ]] && echo "using list $f" && grep -v -e \^\# -e "localhost" -e '^$' $f | awk "${FMT_HOST}" >> /tmp/adblock.all.tmp
 	done
 
 	# Process TPL-format lists
@@ -67,7 +67,7 @@ process_source_list() {
 	done
 
 	for f in list.*.dnsmasq.txt; do
-		[[ ${USELISTS[*]} =~ "$f" ]] && echo "using list $f" && grep -v -e "localhost" -e '^$' "$f" | awk "${FMT_DNSMASQ}" >> /tmp/adblock.all.tmp
+		[[ ${USELISTS[*]} =~ "$f" ]] && echo "using list $f" && grep -v -e \^\# -e "localhost" -e '^$' "$f" | awk "${FMT_DNSMASQ}" >> /tmp/adblock.all.tmp
 	done
 
 	# Filter out duplicates, count

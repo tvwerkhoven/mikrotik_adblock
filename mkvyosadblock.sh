@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 
-# Make Edgerouter / dnsmasq DNS NXDOMAIN block list based on hosts and other
+# Make VyOS / powerdns DNS NXDOMAIN block list based on hosts and other
 # filter lists
 #
 # # Blocking approach
@@ -49,8 +49,7 @@ collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master
 collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardMobileSpyware.txt" "list.adguardmobilespyware.hosts.txt"
 collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardMobileAds.txt" "list.adguardmobileads.hosts.txt"
 collect_source_list "https://easylist-msie.adblockplus.org/easylistdutch.tpl" "list.easylistdutch.tpl.txt"
-collect_source_list "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=dnsmasq&showintro=0&mimetype=plaintext"  "list.yoyo.dnsmasq.txt"
-collect_source_list "https://dnsmasq.oisd.nl/basic/" "oisd.dnsmasq.txt"
+collect_source_list "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext"  "list.yoyo.hosts.txt"collect_source_list "https://dnsmasq.oisd.nl/basic/" "oisd.dnsmasq.txt"
 
 
 ### Process for VyOS / PowerDNS

@@ -2,18 +2,21 @@
 # 
 # Make Edgerouter / dnsmasq DNS NXDOMAIN block list based on hosts and other
 # filter lists
+# 
+# # Sources
+# 1. https://www.vanwerkhoven.org/blog/2023/dns-based-adblocking-on-vyos/
 #
 # # Blocking approach
 # 
-# Solution 1 (preferred):
+# Solution 1 - serve NXDOMAIN (preferred):
 # /ip dns static
 # add type=NXDOMAIN name="1-1ads.com"
 # 
-# Solution 2 (requires additional tcp-reset firewall filter):
+# Solution 2 - serve invalid IP (requires additional tcp-reset firewall filter):
 # /ip dns static
 # add address=240.0.0.1 name="1-1ads.com"
 #
-# Solution 3 (worst, might redirect to local webserver):
+# Solution 3 - resolve to localhost IP (worst, might redirect to local webserver):
 # /ip dns static
 # add address=127.0.0.1 name="1-1ads.com"
 
@@ -49,7 +52,7 @@ collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master
 collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardMobileSpyware.txt" "list.adguardmobilespyware.hosts.txt"
 collect_source_list "https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardMobileAds.txt" "list.adguardmobileads.hosts.txt"
 collect_source_list "https://easylist-msie.adblockplus.org/easylistdutch.tpl" "list.easylistdutch.tpl.txt"
-collect_source_list "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=dnsmasq&showintro=0&mimetype=plaintext"  "list.yoyo.dnsmasq.txt"
+collect_source_list "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext" "list.yoyo.hosts.txt"
 collect_source_list "https://dnsmasq.oisd.nl/basic/" "oisd.dnsmasq.txt"
 
 

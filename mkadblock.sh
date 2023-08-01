@@ -36,9 +36,9 @@ collect_source_list() {
 	fi
 	# Check if file is big enough (e.g. oisd has rate limiting which might return an empty file)
 	if [[ -f "/tmp/adblock_newlist.txt" ]]; then
-		len=$(test  && wc -l < /tmp/adblock_newlist.txt)
+		len=$(wc -l < /tmp/adblock_newlist.txt)
 		if [[ $len -gt 500 ]]; then
-			mv /tmp/newlist "${filename}"
+			mv /tmp/adblock_newlist.txt "${filename}"
 			wc -l "${filename}"
 		else
 			echo "warning: file too small, not used ($filename)"
